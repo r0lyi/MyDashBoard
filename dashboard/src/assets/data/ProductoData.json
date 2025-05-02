@@ -1,0 +1,92 @@
+[
+    {
+      "id": 1,
+      "name": "Zapatillas Running Pro",
+      "brand": "MarcaA",
+      "price": 120.50,
+      "rating": 4.5,
+      "unitsSold": 500,
+      "repurchaseRate": 0.3
+    },
+    {
+      "id": 2,
+      "name": "Camiseta Deportiva Algodón",
+      "brand": "MarcaB",
+      "price": 25.00,
+      "rating": 3.8,
+      "unitsSold": 1200,
+      "repurchaseRate": 0.6
+    },
+    {
+      "id": 3,
+      "name": "Balón de Fútbol Profesional",
+      "brand": "MarcaA",
+      "price": 55.00,
+      "rating": 4.9,
+      "unitsSold": 300,
+      "repurchaseRate": 0.2
+    },
+    {
+      "id": 4,
+      "name": "Mochila Gym Compacta",
+      "brand": "MarcaC",
+      "price": 35.99,
+      "rating": 4.2,
+      "unitsSold": 800,
+      "repurchaseRate": 0.45
+    },
+    {
+      "id": 5,
+      "name": "Guantes Ciclismo Acolchados",
+      "brand": "MarcaB",
+      "price": 40.00,
+      "rating": 4.0,
+      "unitsSold": 450,
+      "repurchaseRate": 0.5
+    },
+    {
+      "id": 6,
+      "name": "Gafas Natación Competición",
+      "brand": "MarcaC",
+      "price": 29.95,
+      "rating": 4.7,
+      "unitsSold": 600,
+      "repurchaseRate": 0.35
+    },
+     {
+      "id": 7,
+      "name": "Pesa Rusa 10kg",
+      "brand": "MarcaA",
+      "price": 45.00,
+      "rating": 4.1,
+      "unitsSold": 200,
+      "repurchaseRate": 0.1
+    },
+    {
+      "id": 8,
+      "name": "Esterilla Yoga Antideslizante",
+      "brand": "MarcaD",
+      "price": 50.00,
+      "rating": 4.6,
+      "unitsSold": 700,
+      "repurchaseRate": 0.7
+    },
+     {
+      "id": 9,
+      "name": "Rodillo Espuma Masaje",
+      "brand": "MarcaD",
+      "price": 20.00,
+      "rating": 4.3,
+      "unitsSold": 900,
+      "repurchaseRate": 0.65
+    },
+     {
+      "id": 10,
+      "name": "Smartwatch Deportivo",
+      "brand": "MarcaC",
+      "price": 250.00,
+      "rating": 4.8,
+      "unitsSold": 150,
+      "repurchaseRate": 0.15
+    }
+  ]

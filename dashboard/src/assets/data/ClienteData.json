@@ -1,0 +1,80 @@
+{
+  "kpis": [
+    {
+      "icon": "👥",
+      "title": "Clientes Activos",
+      "value": "2,345",
+      "color": "#4CAF50"
+    },
+    {
+      "icon": "📅",
+      "title": "Edad Promedio",
+      "value": "28.5",
+      "color": "#2196F3"
+    },
+    {
+      "icon": "🌍",
+      "title": "País Principal",
+      "value": "España",
+      "color": "#FF9800"
+    },
+    {
+      "icon": "🏅",
+      "title": "Deporte Top",
+      "value": "Fútbol",
+      "color": "#E91E63"
+    }
+  ],
+  "ageData": {
+    "labels": ["Fútbol", "Baloncesto", "Tenis", "Natación", "Ciclismo"],
+    "datasets": [
+      {
+        "label": "18-25",
+        "data": [450, 300, 150, 200, 100],
+        "backgroundColor": "#4CAF50"
+      },
+      {
+        "label": "26-35",
+        "data": [600, 400, 200, 250, 150],
+        "backgroundColor": "#2196F3"
+      },
+      {
+        "label": "36-45",
+        "data": [300, 200, 100, 150, 80],
+        "backgroundColor": "#FF9800"
+      },
+      {
+        "label": ">45",
+        "data": [150, 100, 50, 80, 60],
+        "backgroundColor": "#E91E63"
+      }
+    ]
+  },
+  "genderData": {
+    "labels": ["Masculino", "Femenino", "Otro"],
+    "datasets": [
+      {
+        "data": [1400, 900, 45],
+        "backgroundColor": ["#2196F3", "#E91E63", "#888888"]
+      }
+    ]
+  },
+  "geoData": {
+    "labels": ["España", "Francia", "Italia", "Portugal", "Andorra", "Otros"],
+    "datasets": [
+      {
+        "data": [1200, 400, 300, 200, 150, 95],
+        "backgroundColor": ["#4CAF50", "#2196F3", "#FF9800", "#E91E63", "#00BCD4", "#888888"]
+      }
+    ]
+  },
+  "sportsData": {
+    "labels": ["Fútbol", "Baloncesto", "Tenis", "Natación", "Ciclismo", "Atletismo", "Voleibol"],
+    "datasets": [
+      {
+        "data": [800, 500, 300, 250, 200, 150, 140],
+        "backgroundColor": ["#4CAF50", "#2196F3", "#FF9800", "#E91E63", "#00BCD4", "#FFC107", "#9C27B0"]
+      }
+    ]
+  }
+}
