@@ -42,6 +42,8 @@ import './theme/variables.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+  app.use(VueApexCharts);
+
 
 router.isReady().then(() => {
   app.mount('#app');

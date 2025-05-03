@@ -1,7 +1,7 @@
 <template>
   <div class="apexchart-container">
     <apexchart
-      type="bubble"
+      type="bar"
       :options="chartOptions"
       :series="seriesData"
     ></apexchart>
@@ -12,55 +12,45 @@
 import type { ApexOptions } from 'apexcharts';
 import type { PropType } from 'vue';
 import type { ApexAxisChartSeries } from 'apexcharts';
-import type { RepurchaseDataPoint } from '@/types/product'; // Importa nuestro tipo definido
 
 defineProps({
-  seriesData: { // Espera [{ name: string, data: RepurchaseDataPoint[] }]
-    type: Array as PropType<{ name: string; data: RepurchaseDataPoint[] }[] | ApexAxisChartSeries>,
+  seriesData: { // Espera [{ name: string, data: number[] }]
+    type: Array as PropType<ApexAxisChartSeries>,
     required: true,
   },
-  chartOptions: {
+  chartOptions: { // Espera un objeto de opciones de ApexCharts
     type: Object as PropType<ApexOptions>,
     default: () => ({
         chart: {
-            id: 'repurchase-bubble-chart',
-            type: 'bubble',
-            toolbar: { show: true },
+            id: 'product-popularity-chart',
+            type: 'bar',
+            toolbar: { show: false },
             parentHeightOffset: 0
         },
-        title: { text: 'Tasa de Recompra por Producto', align: 'left' },
+        title: {
+            text: 'Productos Más Populares (por Unidades Vendidas)',
+            align: 'left'
+        },
+         plotOptions: {
+            bar: {
+                distributed: true, // Opcional: colorear cada barra diferente
+                horizontal: true // Barras horizontales para nombres largos de productos
+            }
+        },
+        dataLabels: { enabled: false }, // Ocultar los números sobre las barras
+        legend: { show: false },
         xaxis: {
-            title: { text: 'Ventas (€)' },
-            labels: {
-                 // ***** Tipado explícito en formatter *****
-                 formatter: function(val: number): string { return val.toFixed(0) + '€'; }
-                 // ***** Fin Tipado *****
-            }
+            // Las categorías (nombres de productos) vendrán de la prop chartOptions.xaxis.categories
+            categories: [], // Placeholder
+            title: { text: 'Unidades Vendidas' } // Título del eje X (valor)
         },
-        yaxis: {
-            title: { text: 'Tasa de Recompra' },
-            min: 0, max: 1, // Tasa de 0 a 1
-             labels: {
-                 // ***** Tipado explícito en formatter *****
-                 formatter: function(val: number): string { return (val * 100).toFixed(0) + '%'; }
-                 // ***** Fin Tipado *****
-            }
+         yaxis: {
+            // Eje Y (categorías) ahora son los nombres de productos
+            title: { text: 'Producto' },
+            // Si necesitas formatear nombres de productos largos:
+            // labels: { formatter: function (val: string): string { return val.substring(0, 20) + '...'; } }
         },
-        dataLabels: { enabled: false },
-        fill: { opacity: 0.8 },
-        tooltip: {
-            enabled: true,
-            custom: function({ series, seriesIndex, dataPointIndex, w }): string {
-                 const pointData = w.config.series[seriesIndex].data[dataPointIndex] as RepurchaseDataPoint;
-
-                  return `<div class="apexcharts-tooltip-custom">` +
-                        `<span>Producto: ${pointData[3] || 'N/A'}</span><br/>` +
-                        `<span>Ventas: ${pointData[0].toFixed(0)}€</span><br/>` +
-                        `<span>Tasa Recompra: ${(pointData[1] * 100).toFixed(1)}%</span><br/>` +
-                         `<span>Unidades Vendidas: ${pointData[2]}</span>` +
-                        `</div>`;
-             }
-         },
+        tooltip: { enabled: true }
     }),
   },
 });

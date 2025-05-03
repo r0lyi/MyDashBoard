@@ -1,56 +1,199 @@
 <template>
-    <div class="apexchart-container">
-      <apexchart
-        type="bar"
-        :options="chartOptions"
-        :series="seriesData"
-      ></apexchart>
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  import type { ApexOptions } from 'apexcharts';
-  import type { PropType } from 'vue';
-  
-  defineProps({
-    seriesData: {
-      type: Array as PropType<ApexAxisChartSeries | ApexNonAxisChartSeries>,
-      required: true,
-    },
-    chartOptions: {
-      type: Object as PropType<ApexOptions>,
-      default: () => ({
-          // ... otras opciones ...
-          yaxis: {
-               tickAmount: 4,
-               labels: {
-                   // ***** MODIFICACIÓN AQUÍ *****
-                   formatter: function(val: number): string { // Añade `: number` y tipo de retorno
-                       return val.toFixed(0).toString();
-                   }
-                   // ***** FIN MODIFICACIÓN *****
-               }
+  <div class="apexchart-container">
+    <apexchart
+      type="radar"
+      :options="chartOptions"
+      :series="seriesData"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { ApexOptions, ApexAxisChartSeries } from 'apexcharts';
+import type { PropType } from 'vue';
+
+interface ChartConfiguration {
+  chart: ApexOptions['chart'];
+  title: ApexOptions['title'];
+  xaxis: ApexOptions['xaxis'];
+  yaxis: ApexOptions['yaxis'];
+  [key: string]: unknown;
+}
+
+defineProps({
+  seriesData: {
+    type: Array as PropType<ApexAxisChartSeries>,
+    required: true,
+    validator: (value: ApexAxisChartSeries) => value.every(serie => 
+      Array.isArray(serie.data) && serie.data.length > 0
+    )
+  },
+  chartOptions: {
+    type: Object as PropType<ApexOptions>,
+    default: (): ChartConfiguration => ({
+      chart: {
+        id: 'brand-performance-chart',
+        type: 'radar',
+        height: '100%',
+        width: '100%',
+        toolbar: { 
+          show: false 
+        },
+        parentHeightOffset: 0,
+        animations: {
+          enabled: true,
+          easing: 'easeout',
+          speed: 800
+        },
+        dropShadow: {
+          enabled: true,
+          blur: 8,
+          left: 1,
+          top: 1
+        }
+      },
+      title: {
+        text: 'Brand Performance Analysis',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontWeight: '600',
+          color: '#2D3748',
+          fontFamily: 'Inter, sans-serif'
+        }
+      },
+      xaxis: {
+        categories: ['Sales (%)', 'Rating (%)', 'Physical Stores (%)'],
+        labels: {
+          style: {
+            fontSize: '12px',
+            fontWeight: '500',
+            colors: '#4A5568',
+            fontFamily: 'Inter, sans-serif'
+          }
+        }
+      },
+      yaxis: {
+        tickAmount: 4,
+        min: 0,
+        max: 100,
+        labels: {
+          style: {
+            colors: '#718096',
+            fontSize: '10px',
+            fontFamily: 'Inter, sans-serif'
           },
-          // ... otras opciones ...
-      }),
-    },
-  });
-  </script>
-  
-  <style scoped>
+          formatter: (val: number) => `${Math.round(val)}%`
+        }
+      },
+      plotOptions: {
+        radar: {
+          polygons: {
+            strokeColors: '#E2E8F0',
+            fill: {
+              colors: ['#F8FAFC', '#fff']
+            },
+            connectorColors: '#E2E8F0'
+          }
+        }
+      },
+      markers: {
+        size: 5,
+        colors: '#fff',
+        strokeColors: ['#4299E1', '#48BB78', '#9F7AEA'],
+        strokeWidth: 2
+      },
+      tooltip: {
+        theme: 'light',
+        style: {
+          fontSize: '12px',
+          fontFamily: 'Inter, sans-serif'
+        },
+        y: {
+          formatter: (val: number) => `${val}%`
+        }
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+        fontSize: '14px',
+        fontWeight: 600,
+        fontFamily: 'Inter, sans-serif',
+        itemMargin: {
+          horizontal: 20
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontSize: '10px',
+          fontWeight: '600',
+          fontFamily: 'Inter, sans-serif'
+        },
+        background: {
+          enabled: true,
+          foreColor: '#fff',
+          padding: 4,
+          borderRadius: 2,
+          borderWidth: 1,
+          borderColor: '#fff',
+          opacity: 0.9
+        }
+      },
+      colors: ['#4299E1', '#48BB78', '#9F7AEA'],
+      fill: {
+        opacity: 0.2,
+        type: 'solid'
+      },
+      stroke: {
+        width: 2,
+        curve: 'smooth'
+      },
+      responsive: [{
+        breakpoint: 768,
+        options: {
+          chart: {
+            height: '300px'
+          },
+          title: {
+            style: {
+              fontSize: '16px'
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+    })
+  }
+});
+</script>
+
+<style scoped>
+.apexchart-container {
+  --chart-height: 42vh;
+  --primary-color: #4299E1;
+
+  width: 100%;
+  height: var(--chart-height);
+  min-height: 300px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.apexchart-container :deep(.apexcharts) {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
   .apexchart-container {
-    width: 100%;
-    height: 350px;
-    display: flex; /* Para centrar o alinear el chart dentro */
-    justify-content: center;
-    align-items: center;
-     position: relative;
+    --chart-height: 55vh;
+    padding: 0.5rem;
   }
-  /* Puedes necesitar ajustar estilos internos si el chartOptions.chart.parentHeightOffset: 0
-     no funciona perfectamente en tu layout de Ionic Card */
-  /* Por ejemplo: */
-  .apexchart-container ::v-deep .apexcharts {
-      width: 100% !important;
-      height: 100% !important;
-  }
-  </style>
+}
+</style>
