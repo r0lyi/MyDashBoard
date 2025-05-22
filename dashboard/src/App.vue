@@ -3,29 +3,21 @@
     <ion-split-pane content-id="main-content">
       <ion-menu content-id="main-content" type="overlay">
         <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Dashboard</ion-list-header>
-            <ion-note>Data Visualization</ion-note>
+          <ion-list id="main-menu-list">
+            <ion-list-header class="menu-header">📈 Dashboard</ion-list-header>
+            <ion-note class="menu-note">Visualización de Datos Clave</ion-note>
 
-            <ion-menu-toggle
-              :auto-hide="false"
-              v-for="(p, i) in appPages"
-              :key="i"
-            >
+            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item
+                @click="selectedIndex = i"
                 router-direction="root"
                 :router-link="p.url"
                 lines="none"
                 :detail="false"
-                class="hydrated"
-                :class="{ selected: selectedIndex === i }"
+                class="menu-item"
+                :class="{ 'menu-item-selected': selectedIndex === i }"
               >
-                <ion-icon
-                  aria-hidden="true"
-                  slot="start"
-                  :ios="p.iosIcon"
-                  :md="p.mdIcon"
-                ></ion-icon>
+                <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
@@ -51,51 +43,32 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
-} from "@ionic/vue";
+} from '@ionic/vue';
 import {
-  peopleOutline,
-  peopleSharp,
-  bagOutline,
-  bagSharp,
-  barbellOutline,
-  barbellSharp,
-  calendarOutline,
-  calendarSharp,
-  speedometerOutline,
-  speedometerSharp,
-} from "ionicons/icons";
-import { ref, onMounted, watch } from "vue";
-import { useRoute } from "vue-router";
+  rocketOutline, rocketSharp,
+  pulseOutline, pulseSharp,
+  speedometerOutline, speedometerSharp,
+} from 'ionicons/icons';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: "Demografia Clientes", // Nombre más descriptivo
-    url: "/DemografiaCliente",
-    iosIcon: peopleOutline,
-    mdIcon: peopleSharp,
+    title: 'Negocio',
+    url: '/negocio',
+    iosIcon: rocketOutline,
+    mdIcon: rocketSharp,
   },
   {
-    title: "Analisis Productos", // Nombre más descriptivo
-    url: "/AnalisisProducto",
-    iosIcon: bagOutline,
-    mdIcon: bagSharp,
+    title: 'Técnico',
+    url: '/tecnico',
+    iosIcon: pulseOutline,
+    mdIcon: pulseSharp,
   },
   {
-    title: "Metricas Deportivas", // Nombre más descriptivo
-    url: "/MetricaDeportiva",
-    iosIcon: barbellOutline, // Podrías buscar otros íconos para diferenciar
-    mdIcon: barbellSharp, // Podrías buscar otros íconos para diferenciar
-  },
-  {
-    title: "Analisis Eventos", // Nombre más descriptivo
-    url: "/AnalisisEvento",
-    iosIcon: calendarOutline, // Podrías buscar otros íconos para diferenciar
-    mdIcon: calendarSharp, // Podrías buscar otros íconos para diferenciar
-  },
-  {
-    title: "KPIs Resumen", // Nombre más descriptivo
-    url: "/kpis",
+    title: 'KPIs (Visión General)',
+    url: '/kpis',
     iosIcon: speedometerOutline,
     mdIcon: speedometerSharp,
   },
@@ -103,10 +76,8 @@ const appPages = [
 
 const route = useRoute();
 
-
 /********************************************************************** */
 // 🔄 Función para actualizar el `selectedIndex` según la URL actual
-
 
 const updateSelectedIndex = () => {
   const currentPath = route.path;
@@ -116,173 +87,115 @@ const updateSelectedIndex = () => {
   }
 };
 
-
 // Ejecutar cuando la app carga
 onMounted(updateSelectedIndex);
-
 
 // Ejecutar cada vez que cambia la ruta
 watch(route, updateSelectedIndex);
 /********************************************************************** */
-
-
 </script>
 
-
 <style scoped>
+/* Variables de Color con degradado azul-morado */
+:root {
+  /* Colores para el degradado de fondo del menú */
+  --ion-menu-gradient-start: #3B006C; /* Un morado oscuro profundo */
+  --ion-menu-gradient-end: #000033;   /* Un azul muy oscuro, casi negro */
 
+  /* Colores del texto y elementos interactivos */
+  --ion-menu-text-color: #E0E0E0; /* Gris claro para texto general */
+  --ion-menu-selected-bg: rgba(var(--ion-color-primary-rgb), 0.2); /* Fondo sutil para item seleccionado */
+  --ion-menu-selected-color: var(--ion-color-primary); /* Color de acento para item seleccionado */
+  --ion-menu-border-color: rgba(255, 255, 255, 0.1); /* Líneas divisorias sutiles */
+}
 
+/* Estilos para el Split Pane */
 ion-split-pane {
-    /*--side-width: 350px;*/
-    --side-max-width: 280px;
+  --side-max-width: 280px; /* Ancho máximo del menú */
 }
 
-
+/* Estilos para el Contenido del Menú */
 ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  /* Aplicar el degradado aquí */
+  --background: linear-gradient(180deg, var(--ion-menu-gradient-start), var(--ion-menu-gradient-end));
+  color: var(--ion-menu-text-color);
 }
 
-
-ion-menu.md ion-content {
-  --padding-start: 8px;
-  --padding-end: 8px;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
-}
-
-
-ion-menu.md ion-list {
+/* Estilos generales de la lista del menú */
+ion-list#main-menu-list {
   padding: 20px 0;
+  border-bottom: 1px solid var(--ion-menu-border-color); /* Separador sutil */
 }
 
-
-ion-menu.md ion-note {
-  margin-bottom: 30px;
-}
-
-
-ion-menu.md ion-list-header,
-ion-menu.md ion-note {
-  padding-left: 10px;
-}
-
-
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-background-color-step-150, #d7d8da);
-}
-
-
-ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 22px;
-  font-weight: 600;
-
-
-  min-height: 20px;
-}
-
-
-ion-menu.md ion-list#labels-list ion-list-header {
-  font-size: 16px;
-
-
-  margin-bottom: 18px;
-
-
-  color: #757575;
-
-
-  min-height: 26px;
-}
-
-
-ion-menu.md ion-item {
-  --padding-start: 10px;
-  --padding-end: 10px;
-  border-radius: 4px;
-}
-
-
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
-
-
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
-
-ion-menu.md ion-item ion-label {
-  font-weight: 500;
-}
-
-
-ion-menu.ios ion-content {
-  --padding-bottom: 20px;
-}
-
-
-ion-menu.ios ion-list {
-  padding: 20px 0 0 0;
-}
-
-
-ion-menu.ios ion-note {
-  line-height: 24px;
-  margin-bottom: 20px;
-}
-
-
-ion-menu.ios ion-item {
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --min-height: 50px;
-}
-
-
-ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-
-ion-menu.ios ion-item ion-icon {
+/* Encabezados del menú */
+.menu-header {
   font-size: 24px;
-  color: #73849a;
+  font-weight: 700;
+  color: #FFFFFF; /* Blanco puro para el título principal */
+  padding-left: 20px;
+  margin-bottom: 5px;
+  min-height: auto; /* Anula la altura mínima por defecto de Ionic */
 }
 
-
-ion-menu.ios ion-list#labels-list ion-list-header {
-  margin-bottom: 8px;
+.menu-note {
+  font-size: 14px;
+  color: var(--ion-color-medium); /* Un gris un poco más suave */
+  padding-left: 20px;
+  margin-bottom: 30px;
+  display: block; /* Asegura que ocupe su propia línea */
 }
 
-
-ion-menu.ios ion-list-header,
-ion-menu.ios ion-note {
-  padding-left: 16px;
-  padding-right: 16px;
+/* Ítems del menú */
+.menu-item {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --min-height: 50px;
+  border-radius: 8px; /* Bordes ligeramente redondeados */
+  margin: 8px 12px; /* Margen para separación visual */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Transición suave */
+  color: var(--ion-menu-text-color); /* Color por defecto del texto */
+  --background-hover: rgba(var(--ion-color-primary-rgb), 0.1); /* Efecto hover sutil */
 }
 
-
-ion-menu.ios ion-note {
-  margin-bottom: 8px;
+.menu-item ion-icon {
+  font-size: 22px; /* Tamaño de icono ligeramente más grande */
+  color: var(--ion-menu-text-color); /* Color por defecto del icono */
+  transition: color 0.2s ease;
 }
 
-
-ion-note {
-  display: inline-block;
+.menu-item ion-label {
+  font-weight: 500;
   font-size: 16px;
-
-
-  color: var(--ion-color-medium-shade);
 }
 
+/* Estilo para el ítem seleccionado */
+.menu-item-selected {
+  --background: var(--ion-menu-selected-bg);
+  color: var(--ion-menu-selected-color);
+  font-weight: 600; /* Texto un poco más negrita al seleccionar */
+}
 
-ion-item.selected {
-  --color: var(--ion-color-primary);
+.menu-item-selected ion-icon {
+  color: var(--ion-menu-selected-color);
+}
+
+/* Remueve bordes por defecto que podrían aparecer */
+ion-item {
+  --border-radius: 0;
+  --border-color: transparent;
+  --highlight-background: transparent;
+}
+
+/* Ajustes específicos para iOS y MD si es necesario (mantengo algunos de los tuyos por si acaso, pero los nuevos overrides suelen ser suficientes) */
+ion-menu.md ion-list#main-menu-list {
+  border-bottom: none; /* Ya manejado por .menu-list */
+}
+ion-menu.md ion-item {
+  --padding-start: 20px; /* Sobrescribe el valor MD por defecto */
+  --padding-end: 20px;
+}
+ion-menu.ios ion-item {
+  --padding-start: 20px; /* Sobrescribe el valor iOS por defecto */
+  --padding-end: 20px;
 }
 </style>

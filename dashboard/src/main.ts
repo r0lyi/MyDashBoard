@@ -20,11 +20,6 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
-import VueApexCharts from "vue3-apexcharts"; // Importa el wrapper
-
-
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -42,8 +37,6 @@ import './theme/variables.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-  app.use(VueApexCharts);
-
 
 router.isReady().then(() => {
   app.mount('#app');

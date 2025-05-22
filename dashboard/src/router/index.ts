@@ -5,32 +5,20 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/DemografiaCliente',
+    redirect: '/negocio'
   },
   {
-    path: '/DemografiaCliente',
-    component: () => import ('../views/DemografiaCliente.vue')
-  },
-  
-  {
-    path: '/AnalisisProducto',
-    component: () => import ('../views/AnalisisProducto.vue')
+    path: '/negocio',
+    component: () => import ('../views/NegocioPage.vue')
   },
   {
-    path: '/MetricaDeportiva',
-    component: () => import ('../views/MetricaDeportiva.vue')
-  }
-  ,
-  {
-    path: '/AnalisisEvento',
-    component: () => import ('../views/AnalisisEvento.vue')
-  }
-  ,
+    path: '/tecnico',
+    component: () => import ('../views/TecnicoPage.vue')
+  },
   {
     path: '/kpis',
     component: () => import ('../views/KpiPage.vue')
   }
-  
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

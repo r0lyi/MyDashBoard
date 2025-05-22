@@ -1,5 +1,5 @@
 {
-  "name": "dashboard",
+  "name": "dashboardInit",
   "integrations": {
     "capacitor": {}
   },
