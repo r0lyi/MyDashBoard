@@ -86,11 +86,11 @@ const businessKpis = ref<SmartGoal[]>([
   },
   {
     id: 2,
-    title: "Elevar Ticket Promedio Diario",
-    description: "Aumentar nuestras ventas totales diarias en un 15% (apuntando de $3624 a $4168) antes de que finalice el mes. Nos centraremos en la venta cruzada en el carrito de compra y la oferta de productos complementarios al finalizar la transacción.",
+    title: "Mejoras de venta",
+    description: "Aumentar nuestras ventas totales diarias en un 15% (apuntando de $4000 a $10000) antes de que finalice el mes. Nos centraremos en la venta cruzada en el carrito de compra y la oferta de productos complementarios al finalizar la transacción.",
     smart: [
       { letter: "S", content: "Aumentar ventas diarias en un 15%." },
-      { letter: "M", content: "15% (de $3624 a $4168)." },
+      { letter: "M", content: "15% (de $5000 a $10000)." },
       { letter: "A", content: "Optimizar la venta cruzada y ofertas complementarias." },
       { letter: "R", content: "Impulsar el crecimiento general y la eficiencia en el proceso de compra." },
       { letter: "T", content: "Para final de mes." }
@@ -98,7 +98,7 @@ const businessKpis = ref<SmartGoal[]>([
   },
   {
     id: 3,
-    title: "Potenciar Tráfico Cualificado en Web",
+    title: "Potenciar Tráfico en Web",
     description: "Incrementar nuestras visitas web por hora en un 20% (pasando de 96 a 115 visitantes) en las próximas 4 semanas. Esto se logrará con una estrategia de contenidos SEO mejorada y publicaciones más frecuentes y atractivas en Instagram y TikTok.",
     smart: [
       { letter: "S", content: "Incrementar visitas web por hora en un 20%." },

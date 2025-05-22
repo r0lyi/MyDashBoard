@@ -153,7 +153,7 @@ const serverTrafficSeries = ref([{ name: 'Solicitudes', data: [500, 520, 510, 53
 const serverTrafficValue = ref('610');
 
 const websiteErrorsOptions = ref({ ...baseSparklineChartOptions, colors: ['#FF6347'] });
-const websiteErrorsSeries = ref([{ name: 'Errores', data: [5, 4, 6, 3, 5, 7, 6, 8, 7, 9, 8, 10] }]);
+const websiteErrorsSeries = ref([{ name: 'Errores', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }]);
 const websiteErrorsValue = ref('10');
 
 const pageLoadTimeOptions = ref({ ...baseSparklineChartOptions, colors: ['#9932CC'] });
