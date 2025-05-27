@@ -31,7 +31,7 @@
           </ion-col>
           <ion-col size="6" size-lg="3">
             <SparkLine
-              title="Ventas Totales (Hoy)"
+              title="Ventas Totales "
               :value="sparkline2Value"
               :chart-options="sparkline2Options"
               :chart-series="sparkline2Series"
@@ -42,7 +42,7 @@
           </ion-col>
           <ion-col size="6" size-lg="3">
             <SparkLine
-              title="Visitas Web (Última Hora)"
+              title="Visitas Web "
               :value="sparkline3Value"
               :chart-options="sparkline3Options"
               :chart-series="sparkline3Series"
@@ -53,7 +53,7 @@
           </ion-col>
           <ion-col size="6" size-lg="3">
             <SparkLine
-              title="Artículos Vendidos (Hoy)"
+              title="Artículos Vendidos "
               :value="sparkline4Value"
               :chart-options="sparkline4Options"
               :chart-series="sparkline4Series"
